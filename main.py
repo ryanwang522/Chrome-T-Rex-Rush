@@ -133,6 +133,17 @@ class Dino():
         self.stand_pos_width = self.rect.width
         self.duck_pos_width = self.rect1.width
 
+    def refresh(self):
+        self.image = self.images[0]
+        self.index = 0
+        self.counter = 0
+        self.score = 0
+        self.isJumping = False
+        self.isDead = False
+        self.isDucking = False
+        self.isBlinking = False
+        self.movement = [0, 0]
+
     def draw(self):
         screen.blit(self.image,self.rect)
 
@@ -489,7 +500,12 @@ def gameplay():
 
                         if event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
                             gameOver = False
-                            gameplay()
+                            playerDino.refresh()
+                            cacti.empty()
+                            pteras.empty()
+                            clouds.empty()
+                            last_obstacle.empty()
+ 
             highsc.update(high_score)
             if pygame.display.get_surface() != None:
                 disp_gameOver_msg(retbutton_image,gameover_image)
